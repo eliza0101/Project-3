@@ -1,3 +1,2 @@
 .env
-generated_images/
-
+generated_images/*
