@@ -1,2 +1,2 @@
-Prompt,SD_Image_Quality,DALL_E_Image_Quality,SD_Relevance,DALL_E_Relevance
-A futuristic cityscape,8,7,Relevant,Not Relevant
+Prompt,Stability AI Caption,Dall-E Caption,Stability AI BLEU,Dall-E BLEU,Stability AI Rouge,Dall-E Rouge
+"sea otter in a bathtub","a sea otter in a bathtub","a baby otter in a tub","0.7598356856515925","5.775353993361614e-78","{'rouge1': Score(precision=0.8333333333333334, recall=1.0, fmeasure=0.9090909090909091), 'rouge2': Score(precision=0.8, recall=1.0, fmeasure=0.888888888888889), 'rougeL': Score(precision=0.8333333333333334, recall=1.0, fmeasure=0.9090909090909091)}","{'rouge1': Score(precision=0.5, recall=0.6, fmeasure=0.5454545454545454), 'rouge2': Score(precision=0.4, recall=0.5, fmeasure=0.4444444444444445), 'rougeL': Score(precision=0.5, recall=0.6, fmeasure=0.5454545454545454)}"
