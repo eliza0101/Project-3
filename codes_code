@@ -1,0 +1,67 @@
+import os
+from datetime import datetime
+# Specify the path to the generated images folder
+folder_path = '/Users/mac/CLASS/Project-3/generated_images'
+
+# List all files in the directory
+files = os.listdir(folder_path)
+
+# Filter for image files (you can add other extensions if needed)
+image_files = [f for f in files if f.endswith(('.png', '.jpg', '.jpeg'))]
+
+# Get the most recent image based on modification time
+if image_files:
+    latest_file = max(
+        image_files, 
+        key=lambda f: os.path.getmtime(os.path.join(folder_path, f))
+    )
+    # Extract the current_unique_id from the filename (without extension)
+    current_unique_id = os.path.splitext(latest_file)[0]
+
+
+
+# Load prompt for images
+prompt_file = open(f'generated_images/{current_unique_id}_prompt.txt')
+prompt = prompt_file.read().split(',')[1]
+
+
+
+# Tunji need to clean up graph, don't need to recalculate score (?)
+from sklearn.preprocessing import StandardScaler
+
+# Plot results
+# Sample reference and generated captions
+reference_captions = [prompt, prompt]
+generated_captions = [stability_ai_caption, dalle_caption]
+
+# Calculate BLEU scores
+bleu_scores = [sentence_bleu([ref.split()], gen.split()) for ref, gen in zip(reference_captions, generated_captions)]
+
+# Calculate ROUGE scores
+scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+rouge_scores = [scorer.score(ref, gen) for ref, gen in zip(reference_captions, generated_captions)]
+rouge1_scores = [score['rouge1'].fmeasure for score in rouge_scores]
+rouge2_scores = [score['rouge2'].fmeasure for score in rouge_scores]
+rougeL_scores = [score['rougeL'].fmeasure for score in rouge_scores]
+
+# Prepare data for K-means
+X = np.array(list(zip(bleu_scores, rouge1_scores)))
+
+# Standardize Scores
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Apply K-means clustering
+n_clusters = 2
+kmeans = KMeans(n_clusters=n_clusters, random_state=42)  # Choose number of clusters
+kmeans.fit(X_scaled)
+labels = kmeans.labels_
+
+# Plotting
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='plasma')
+plt.title('K-means Clustering of BLEU and ROUGE Scores')
+plt.xlabel('BLEU Score')
+plt.ylabel('ROUGE-1 Score')
+plt.grid(True)
+plt.show()
