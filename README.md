@@ -9,6 +9,12 @@ https://shorturl.at/cDq5y
 ## Project Overview
 This project implements a user-centric workflow for AI image generation, comparing outputs from Stable Diffusion and DALL-E. It aims to enhance the image generation process by incorporating user feedback and analyzing the performance of different AI models.
 
+## Files
+* project 3_main_merged.ipynb
+* common_functions.py
+* image_generation_results.csv
+* project 3_works.ipynb (alternative file if "merged" doesn't run for you)
+
 ## Table of Contents
 * Features
 * Installation
@@ -70,8 +76,8 @@ import common_functions as functions
 ```
 
 ## Models Used
-* Stable Diffusion
-* DALL-E
+* Stable Diffusion 3
+* DALL-E 2
 * BlipForConditionalGeneration
 
 ## Usage
